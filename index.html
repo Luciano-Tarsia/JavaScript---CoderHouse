@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital wallet</title>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Orbitron&family=Zen+Kaku+Gothic+Antique:wght@300;400&display=swap" 
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <h1 style="text-align: center;">DIGITAL WALLET</h1>
+    <div id="padre">
+        <div id="efectivo">
+            <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Efectivo</h2>
+            <h2 id="efectivo-disp" style="text-align: center;">Dinero disponible: 0</h2>
+            <h2 style="text-align: center;">Últimas operaciones:</h2>
+            <div style="border: .3cm; border-color: white;">
+                <ul id="efectivo-op"></ul>
+            </div>
+        </div>
+        <div id="banco">
+            <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Banco</h2>
+            <h2 id="banco-disp" style="text-align: center;">Dinero disponible: 0</h2>
+            <h2 style="text-align: center;">Últimas operaciones:</h2>
+            <div style="border: .3cm; border-color: white;">
+                <ul id="banco-op"></ul>
+            </div>
+        </div>
+        <div id="mercadoPago">
+            <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Mercado Pago</h2>
+            <h2 id="mercadoPago-disp" style="text-align: center;">Dinero disponible: 0</h2>
+            <h2 style="text-align: center;">Últimas operaciones:</h2>
+            <div style="border: .3cm; border-color: white;">
+                <ul id="mercadoPago-op"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="js/miarchivo.js"></script>
+</body>
+</html>

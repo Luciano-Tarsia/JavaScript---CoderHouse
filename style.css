@@ -1,0 +1,21 @@
+*{
+    background-color: #161E54;
+    color: #88E0EF;
+    font-family: "Zen Kaku Gothic Antique", sans-serif;
+}
+
+#padre{
+    display: flex; 
+    align-content: space-around; 
+    justify-content: space-around; 
+}
+
+ul li {
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px;
+}
+
+ul {
+    align-items: center;
+}

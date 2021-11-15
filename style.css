@@ -10,6 +10,39 @@
     justify-content: space-around; 
 }
 
+#efectivo-form{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5cm;
+}
+
+#banco-form{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5cm;
+}
+
+#mercadoPago-form{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5cm;
+}
+
+#reset{
+    padding:10px;
+    border:none;
+    background-color:#3F51B5;
+    color:#fff;
+    font-weight:600;
+    border-radius:5px;
+    width:70%;
+    margin: 1cm;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
 ul li {
     list-style-type: none;
     padding: 10px;

@@ -32,55 +32,7 @@ class Medio {
   }
 }
 
-// Funciones para entradas
-
-function input_seguir() {
-  return prompt(
-    "Ingrese lo que quiera hacer. Opciones: \n C: Continuar \n X: Dejar de correr el programa"
-  );
-}
-function input_medio() {
-  return prompt(
-    "Ingrese donde lo que quiera hacer. Opciones: \n E: Efectivo \n B: Banco \n MP: Mercado Pago"
-  );
-}
-function input_operacion() {
-  return prompt(
-    "Ingrese lo que quiera hacer. Opciones: \n G: Para una ganancia \n P: Para una perdida"
-  );
-}
-
-//Función que imprime el ticket final
-
-function printFinal(objeto1, objeto2, objeto3) {
-  s1 =
-    "Su dinero en efectivo disponible es: " +
-    objeto1.disponible +
-    "\nSus operaciones fueron:\n" +
-    objeto1.operaciones.join("\n") +
-    "\n" +
-    "\n";
-
-  s2 =
-    "Su dinero disponible en el banco es: " +
-    objeto2.disponible +
-    "\nSus operaciones fueron:\n" +
-    objeto2.operaciones.join("\n") +
-    "\n" +
-    "\n";
-
-  s3 =
-    "Su dinero disponible en el MercadoPago es: " +
-    objeto3.disponible +
-    "\nSus operaciones fueron:\n" +
-    objeto3.operaciones.join("\n") +
-    "\n" +
-    "\n";
-
-  return s1 + s2 + s3;
-}
-
-//Funciones que se conectan con el HTML
+//Funciones que se conectan con el .html
 
 function htmlDisponible() {   // Imprimo el dinero disponible en cada medio
   document.getElementById("efectivo-disp").innerHTML =
@@ -91,20 +43,44 @@ function htmlDisponible() {   // Imprimo el dinero disponible en cada medio
     "Dinero disponible: " + mercadoPago.disponible;
 }
 
-function htmlOperaciones() {  // Imprimo las últimas 5 operaciones realizadas en cada medio
+function htmlOperaciones() {
+  /*
+  En esta función manipulo la lista de operaciones.
+  Lo que hago es, dad la ul del objeto, borro cada li. Luego de borrarlos, los vuelvo a escribir.
+  Esto lo hago porque al tocar el botón "reset", yo quiero que la lista esté vacía. Y si bien la queue
+  de operaciones se vacía por haber sobreescrito el objeto, el html se mantiene intacto.
+  */
+
   let li;
 
+  //Efectivo
+  let aux = document.getElementById("efectivo-op");
+  while( aux.firstChild ){
+    aux.removeChild( aux.firstChild );
+  }
   for (let i = 0; i < efectivo.operaciones.length; i++) {
     // Cargo lista efectivo
     li = document.createElement("li");
     li.innerHTML = efectivo.operaciones[i];
     document.getElementById("efectivo-op").appendChild(li);
   }
+
+  //Banco
+  aux = document.getElementById("banco-op");
+  while( aux.firstChild ){
+    aux.removeChild( aux.firstChild );
+  }
   for (let i = 0; i < banco.operaciones.length; i++) {
     // Cargo lista banco
     li = document.createElement("li");
     li.innerHTML = banco.operaciones[i];
     document.getElementById("banco-op").appendChild(li);
+  }
+
+  //Mercado Pago
+  aux = document.getElementById("mercadoPago-op");
+  while( aux.firstChild ){
+    aux.removeChild( aux.firstChild );
   }
   for (let i = 0; i < mercadoPago.operaciones.length; i++) {
     // Cargo lista MercadoPago
@@ -114,17 +90,12 @@ function htmlOperaciones() {  // Imprimo las últimas 5 operaciones realizadas e
   }
 }
 
-//main()
+// -- handlers de eventos --
 
-var efectivo;
-var banco;
-var mercadoPago;
+// Botón Reset
+let reset = document.getElementById("reset");
+reset.onclick = () => {
 
-if (
-  localStorage.getItem("efectivo") != null &&
-  prompt("¿Desea resetear su información?\nS:Si\nN:No") == "Si"
-) {
-  // Resteo la memoria
   efectivo = new Medio(
     parseInt(prompt("Ingrese la cantidad de dinero en efectivo disponible"), 10)
   );
@@ -139,61 +110,90 @@ if (
       10
     )
   );
-} else {
-  // Sigo con la misma memoria
-  efectivo = Medio.fromJSON(localStorage.getItem("efectivo"));
-  banco = Medio.fromJSON(localStorage.getItem("banco"));
-  mercadoPago = Medio.fromJSON(localStorage.getItem("mercadoPago"));
-}
 
-var aux = 0;
-var medio; // E: Efectivo | B: Banco | MP: MercadoPago
-var operacion; // G: Ganancia | P: Perdida
-var descripcion; // Descripción de la operación
-var descripcionExt;
+  htmlDisponible();
+  htmlOperaciones();
+  
+  localStorage.setItem("efectivo", JSON.stringify(efectivo));
+  localStorage.setItem("banco", JSON.stringify(banco));
+  localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));
+};
 
-while (input_seguir() == "C") {
-  medio = input_medio();
-  operacion = input_operacion();
-  descripcion = prompt("Ingrese una descripción de la operación");
-  aux = parseInt(prompt("Ingrese el monto a registrar:"), 10);
+// Submit de operación en efectivo
+let efectivoSubmit = document.getElementById("efectivo-submit");
+efectivoSubmit.onclick = () => {
+  let operacion = document.getElementById("efectivo-operacion").value;
+  let monto = parseInt(document.getElementById("efectivo-monto").value,10);
+  let descripcion = document.getElementById("efectivo-desc").value;
+  let descripcionExt;
 
-  if (operacion == "G") {
-    // Ganancia
-    descripcionExt = "G | " + descripcion + " | Monto: " + aux;
-    if (medio == "E") {
-      // Efectivo
-      efectivo.suma(aux, descripcionExt);
-    } else if (medio == "B") {
-      // Banco
-      banco.suma(aux, descripcionExt);
-    } else {
-      // MercadoPago
-      mercadoPago.suma(aux, descripcionExt);
-    }
-  } else {
-    // Perdida
-    descripcionExt = "P | " + descripcion + " | Monto: " + aux;
-    if (medio == "E") {
-      // Efectivo
-      efectivo.resta(aux, descripcionExt);
-    } else if (medio == "B") {
-      // Banco
-      banco.resta(aux, descripcionExt);
-    } else {
-      // MercadoPago
-      mercadoPago.resta(aux, descripcionExt);
-    }
+  if(operacion == "G"){
+    descripcionExt = "G | " + descripcion + " | Monto: " + monto;
+    efectivo.suma(monto, descripcionExt)
+  }else{
+    descripcionExt = "P | " + descripcion + " | Monto: " + monto;
+    efectivo.resta(monto, descripcionExt)
   }
-  alert(
-    "Operación registrada\nSu dinero en efectivo disponible es: " +
-      efectivo.disponible +
-      "\nSu dinero disponible en el banco es: " +
-      banco.disponible +
-      "\nSu dinero disponible en el MercadoPago es: " +
-      mercadoPago.disponible
-  );
+
+  htmlDisponible();
+  htmlOperaciones();
+  
+  localStorage.setItem("efectivo", JSON.stringify(efectivo));
 }
+
+// Submit de operación en banco
+let bancoSubmit = document.getElementById("banco-submit");
+bancoSubmit.onclick = () => {
+  let operacion = document.getElementById("banco-operacion").value;
+  let monto = parseInt(document.getElementById("banco-monto").value,10);
+  let descripcion = document.getElementById("banco-desc").value;
+  let descripcionExt;
+
+  if(operacion == "G"){
+    descripcionExt = "G | " + descripcion + " | Monto: " + monto;
+    banco.suma(monto, descripcionExt)
+  }else{
+    descripcionExt = "P | " + descripcion + " | Monto: " + monto;
+    banco.resta(monto, descripcionExt)
+  }
+
+  htmlDisponible();
+  htmlOperaciones();
+  
+  localStorage.setItem("banco", JSON.stringify(banco));
+}
+
+// Submit de operación en Mercado Pago
+let mercadoPagoSubmit = document.getElementById("mercadoPago-submit");
+mercadoPagoSubmit.onclick = () => {
+  let operacion = document.getElementById("mercadoPago-operacion").value;
+  let monto = parseInt(document.getElementById("mercadoPago-monto").value,10);
+  let descripcion = document.getElementById("mercadoPago-desc").value;
+  let descripcionExt;
+
+  if(operacion == "G"){
+    descripcionExt = "G | " + descripcion + " | Monto: " + monto;
+    mercadoPago.suma(monto, descripcionExt)
+  }else{
+    descripcionExt = "P | " + descripcion + " | Monto: " + monto;
+    mercadoPago.resta(monto, descripcionExt)
+  }
+
+  htmlDisponible();
+  htmlOperaciones();
+  
+  localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));
+}
+
+//main()
+
+var efectivo;
+var banco;
+var mercadoPago;
+
+efectivo = Medio.fromJSON(localStorage.getItem("efectivo"));
+banco = Medio.fromJSON(localStorage.getItem("banco"));
+mercadoPago = Medio.fromJSON(localStorage.getItem("mercadoPago"));
 
 htmlDisponible();
 htmlOperaciones();
@@ -201,5 +201,3 @@ htmlOperaciones();
 localStorage.setItem("efectivo", JSON.stringify(efectivo));
 localStorage.setItem("banco", JSON.stringify(banco));
 localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));
-
-alert("Ejecucion finalizada.\n" + printFinal(efectivo, banco, mercadoPago));

@@ -13,10 +13,30 @@
 </head>
 <body>
     <h1 style="text-align: center;">DIGITAL WALLET</h1>
+
     <div id="padre">
         <div id="efectivo">
             <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Efectivo</h2>
             <h2 id="efectivo-disp" style="text-align: center;">Dinero disponible: 0</h2>
+
+            <form id="efectivo-form" onsubmit="return false">
+                <label>
+                    <label for="fname">Ganancia/Pérdida (G/P):</label><br>
+                    <input id="efectivo-operacion" type="text" style="border-color:white">
+                </label>
+                <label>
+                    <label for="fname">Monto:</label><br>
+                    <input id="efectivo-monto" type="number" style="border-color:white">
+                </label>
+                <label>
+                    <label for="fname">Descripción:</label><br>
+                    <input id="efectivo-desc" type="text" style="border-color:white">
+                </label>
+                <label>
+                    <input id="efectivo-submit" type="submit" value="Registrar" style="border-color:white">
+                </label>
+            </form>
+
             <div style="border: .2cm; border-color: #FF5151; border-style: solid;">    
                 <h3 style="text-align: center;">Últimas operaciones:</h3>
                 <ul id="efectivo-op"></ul>
@@ -25,6 +45,25 @@
         <div id="banco">
             <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Banco</h2>
             <h2 id="banco-disp" style="text-align: center;">Dinero disponible: 0</h2>
+
+            <form id="banco-form" onsubmit="return false">
+                <label>
+                    <label for="fname">Ganancia/Pérdida (G/P):</label><br>
+                    <input id="banco-operacion" type="text" style="border-color:white">
+                </label>
+                <label>
+                    <label for="fname">Monto:</label><br>
+                    <input id="banco-monto" type="number" style="border-color:white">
+                </label>
+                <label>
+                    <label for="fname">Descripción:</label><br>
+                    <input id="banco-desc" type="text" style="border-color:white">
+                </label>
+                <label>
+                    <input id="banco-submit" type="submit" value="Registrar" style="border-color:white">
+                </label>
+            </form>
+
             <div style="border: .2cm; border-color: #FF5151; border-style: solid;">
                 <h3 style="text-align: center;">Últimas operaciones:</h3>
                 <ul id="banco-op"></ul>
@@ -33,12 +72,36 @@
         <div id="mercadoPago">
             <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Mercado Pago</h2>
             <h2 id="mercadoPago-disp" style="text-align: center;">Dinero disponible: 0</h2>
+
+            <form id="mercadoPago-form" onsubmit="return false">
+                <label>
+                    <label for="fname">Ganancia/Pérdida (G/P):</label><br>
+                    <input id="mercadoPago-operacion" type="text" style="border-color:white">
+                </label>
+                <label>
+                    <label for="fname">Monto:</label><br>
+                    <input id="mercadoPago-monto" type="number" style="border-color:white">
+                </label>
+                <label>
+                    <label for="fname">Descripción:</label><br>
+                    <input id="mercadoPago-desc" type="text" style="border-color:white">
+                </label>
+                <label>
+                    <input id="mercadoPago-submit" type="submit" value="Registrar" style="border-color:white">
+                </label>
+            </form>
+
             <div style="border: .2cm; border-color: #FF5151; border-style: solid;">
                 <h3 style="text-align: center;">Últimas operaciones:</h3>
                 <ul id="mercadoPago-op"></ul>
             </div>
         </div>
     </div>
+
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button id="reset" type="button">Reset</button>
+    </div>
+
     <script src="js/miarchivo.js"></script>
 </body>
 </html>

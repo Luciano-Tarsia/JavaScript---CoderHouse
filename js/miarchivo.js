@@ -59,10 +59,7 @@ function htmlOperaciones() {
     aux.removeChild( aux.firstChild );
   }
   for (let i = 0; i < efectivo.operaciones.length; i++) {
-    // Cargo lista efectivo
-    li = document.createElement("li");
-    li.innerHTML = efectivo.operaciones[i];
-    document.getElementById("efectivo-op").appendChild(li);
+    $("#efectivo-op").prepend("<li>" + efectivo.operaciones[i] + "</li>");
   }
 
   //Banco
@@ -72,9 +69,7 @@ function htmlOperaciones() {
   }
   for (let i = 0; i < banco.operaciones.length; i++) {
     // Cargo lista banco
-    li = document.createElement("li");
-    li.innerHTML = banco.operaciones[i];
-    document.getElementById("banco-op").appendChild(li);
+    $("#banco-op").prepend("<li>" + banco.operaciones[i] + "</li>");
   }
 
   //Mercado Pago
@@ -84,9 +79,7 @@ function htmlOperaciones() {
   }
   for (let i = 0; i < mercadoPago.operaciones.length; i++) {
     // Cargo lista MercadoPago
-    li = document.createElement("li");
-    li.innerHTML = mercadoPago.operaciones[i];
-    document.getElementById("mercadoPago-op").appendChild(li);
+    $("#mercadoPago-op").prepend("<li>" + mercadoPago.operaciones[i] + "</li>");
   }
 }
 

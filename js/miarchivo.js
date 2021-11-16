@@ -86,8 +86,9 @@ function htmlOperaciones() {
 // -- handlers de eventos --
 
 // Botón Reset
-let reset = document.getElementById("reset");
-reset.onclick = () => {
+//let reset = document.getElementById("reset");
+
+$("#reset").click( () => {
 
   efectivo = new Medio(
     parseInt(prompt("Ingrese la cantidad de dinero en efectivo disponible"), 10)
@@ -110,7 +111,7 @@ reset.onclick = () => {
   localStorage.setItem("efectivo", JSON.stringify(efectivo));
   localStorage.setItem("banco", JSON.stringify(banco));
   localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));
-};
+});
 
 // Submit de operación en efectivo
 let efectivoSubmit = document.getElementById("efectivo-submit");

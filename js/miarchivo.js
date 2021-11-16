@@ -191,13 +191,28 @@ var efectivo;
 var banco;
 var mercadoPago;
 
-efectivo = Medio.fromJSON(localStorage.getItem("efectivo"));
-banco = Medio.fromJSON(localStorage.getItem("banco"));
-mercadoPago = Medio.fromJSON(localStorage.getItem("mercadoPago"));
+if (localStorage.getItem("efectivo") == null) {
+  // Resteo la memoria
+  efectivo = new Medio(
+    parseInt(prompt("Ingrese la cantidad de dinero en efectivo disponible"), 10)
+  );
+  banco = new Medio(
+    parseInt(prompt("Ingrese la cantidad de dinero disponible en su banco"), 10)
+  );
+  mercadoPago = new Medio(
+    parseInt(
+      prompt(
+        "Ingrese la cantidad de dinero disponible en su cuenta de Mercado Pago"
+      ),
+      10
+    )
+  );
+} else {
+  // Sigo con la misma memoria
+  efectivo = Medio.fromJSON(localStorage.getItem("efectivo"));
+  banco = Medio.fromJSON(localStorage.getItem("banco"));
+  mercadoPago = Medio.fromJSON(localStorage.getItem("mercadoPago"));
+}
 
 htmlDisponible();
 htmlOperaciones();
-
-localStorage.setItem("efectivo", JSON.stringify(efectivo));
-localStorage.setItem("banco", JSON.stringify(banco));
-localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));

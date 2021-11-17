@@ -19,25 +19,32 @@
             <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Efectivo</h2>
             <h2 id="efectivo-disp" style="text-align: center;">Dinero disponible: 0</h2>
 
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button id="efectivo-registrar" type="button">Registrar operación</button>
+            </div>
+
             <form id="efectivo-form" onsubmit="return false">
                 <label>
-                    <label for="fname">Ganancia/Pérdida (G/P):</label><br>
-                    <input id="efectivo-operacion" type="text" style="border-color:white">
+                    <label>Ganancia/Pérdida:</label><br>
+                    <input type="radio" id="efectivo-gan" name="efectivo" value="Ganancia" checked="checked">
+                    <label for="html">Ganancia</label><br>
+                    <input type="radio" id="efectivo-perd" name="efectivo" value="Perdida">
+                    <label for="css">Pérdida</label><br>
                 </label>
                 <label>
                     <label for="fname">Monto:</label><br>
-                    <input id="efectivo-monto" type="number" style="border-color:white">
+                    <input id="efectivo-monto" type="number" style="border-color:white; border-radius: 5px;">
                 </label>
                 <label>
                     <label for="fname">Descripción:</label><br>
-                    <input id="efectivo-desc" type="text" style="border-color:white">
+                    <input id="efectivo-desc" type="text" style="border-color:white; border-radius: 5px;">
                 </label>
                 <label>
-                    <input id="efectivo-submit" type="submit" value="Registrar" style="border-color:white">
+                    <input id="efectivo-submit" type="submit" value="Registrar" style="border-color:white; border-radius: 5px;">
                 </label>
             </form>
 
-            <div style="border: .2cm; border-color: #FF5151; border-style: solid;">    
+            <div style="border: .2cm; border-color: #FF5151; border-style: solid; border-radius: 5px;">    
                 <h3 style="text-align: center;">Últimas operaciones:</h3>
                 <ul id="efectivo-op"></ul>
             </div>
@@ -46,25 +53,32 @@
             <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Banco</h2>
             <h2 id="banco-disp" style="text-align: center;">Dinero disponible: 0</h2>
 
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button id="banco-registrar" type="button">Registrar operación</button>
+            </div>
+
             <form id="banco-form" onsubmit="return false">
                 <label>
-                    <label for="fname">Ganancia/Pérdida (G/P):</label><br>
-                    <input id="banco-operacion" type="text" style="border-color:white">
+                    <label>Ganancia/Pérdida:</label><br>
+                    <input type="radio" id="banco-gan" name="banco" value="Ganancia" checked="checked">
+                    <label for="html">Ganancia</label><br>
+                    <input type="radio" id="banco-perd" name="banco" value="Perdida">
+                    <label for="css">Pérdida</label><br>
                 </label>
                 <label>
                     <label for="fname">Monto:</label><br>
-                    <input id="banco-monto" type="number" style="border-color:white">
+                    <input id="banco-monto" type="number" style="border-color:white; border-radius: 5px;">
                 </label>
                 <label>
                     <label for="fname">Descripción:</label><br>
-                    <input id="banco-desc" type="text" style="border-color:white">
+                    <input id="banco-desc" type="text" style="border-color:white; border-radius: 5px;">
                 </label>
                 <label>
-                    <input id="banco-submit" type="submit" value="Registrar" style="border-color:white">
+                    <input id="banco-submit" type="submit" value="Registrar" style="border-color:white; border-radius: 5px;">
                 </label>
             </form>
 
-            <div style="border: .2cm; border-color: #FF5151; border-style: solid;">
+            <div style="border: .2cm; border-color: #FF5151; border-style: solid; border-radius: 5px;">
                 <h3 style="text-align: center;">Últimas operaciones:</h3>
                 <ul id="banco-op"></ul>
             </div>
@@ -73,25 +87,32 @@
             <h1 style="text-align: center; font-weight: bold; color: #FF5151;">Mercado Pago</h2>
             <h2 id="mercadoPago-disp" style="text-align: center;">Dinero disponible: 0</h2>
 
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button id="mercadoPago-registrar" type="button">Registrar operación</button>
+            </div>
+
             <form id="mercadoPago-form" onsubmit="return false">
                 <label>
-                    <label for="fname">Ganancia/Pérdida (G/P):</label><br>
-                    <input id="mercadoPago-operacion" type="text" style="border-color:white">
+                    <label>Ganancia/Pérdida:</label><br>
+                    <input type="radio" id="mercadoPago-gan" name="mercadoPago" value="Ganancia" checked="checked">
+                    <label for="html">Ganancia</label><br>
+                    <input type="radio" id="mercadoPago-perd" name="mercadoPago" value="Perdida">
+                    <label for="css">Pérdida</label><br>
                 </label>
                 <label>
                     <label for="fname">Monto:</label><br>
-                    <input id="mercadoPago-monto" type="number" style="border-color:white">
+                    <input id="mercadoPago-monto" type="number" style="border-color:white; border-radius: 5px;">
                 </label>
                 <label>
                     <label for="fname">Descripción:</label><br>
-                    <input id="mercadoPago-desc" type="text" style="border-color:white">
+                    <input id="mercadoPago-desc" type="text" style="border-color:white; border-radius: 5px;">
                 </label>
                 <label>
-                    <input id="mercadoPago-submit" type="submit" value="Registrar" style="border-color:white">
+                    <input id="mercadoPago-submit" type="submit" value="Registrar" style="border-color:white; border-radius: 5px;">
                 </label>
             </form>
 
-            <div style="border: .2cm; border-color: #FF5151; border-style: solid;">
+            <div style="border: .2cm; border-color: #FF5151; border-style: solid; border-radius: 5px;">
                 <h3 style="text-align: center;">Últimas operaciones:</h3>
                 <ul id="mercadoPago-op"></ul>
             </div>

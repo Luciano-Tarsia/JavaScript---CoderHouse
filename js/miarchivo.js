@@ -27,14 +27,16 @@ class Medio {
     this.operaciones.push(operacion);
   }
 
-  static fromJSON(serializedJson) {           // Sirve para usar localStorage
+  static fromJSON(serializedJson) {
+    // Sirve para usar localStorage
     return Object.assign(new Medio(), JSON.parse(serializedJson));
   }
 }
 
 //Funciones que se conectan con el .html
 
-function htmlDisponible() {   // Imprimo el dinero disponible en cada medio
+function htmlDisponible() {
+  // Imprimo el dinero disponible en cada medio
   document.getElementById("efectivo-disp").innerHTML =
     "Dinero disponible: " + efectivo.disponible;
   document.getElementById("banco-disp").innerHTML =
@@ -55,8 +57,8 @@ function htmlOperaciones() {
 
   //Efectivo
   let aux = document.getElementById("efectivo-op");
-  while( aux.firstChild ){
-    aux.removeChild( aux.firstChild );
+  while (aux.firstChild) {
+    aux.removeChild(aux.firstChild);
   }
   for (let i = 0; i < efectivo.operaciones.length; i++) {
     $("#efectivo-op").prepend("<li>" + efectivo.operaciones[i] + "</li>");
@@ -64,8 +66,8 @@ function htmlOperaciones() {
 
   //Banco
   aux = document.getElementById("banco-op");
-  while( aux.firstChild ){
-    aux.removeChild( aux.firstChild );
+  while (aux.firstChild) {
+    aux.removeChild(aux.firstChild);
   }
   for (let i = 0; i < banco.operaciones.length; i++) {
     // Cargo lista banco
@@ -74,8 +76,8 @@ function htmlOperaciones() {
 
   //Mercado Pago
   aux = document.getElementById("mercadoPago-op");
-  while( aux.firstChild ){
-    aux.removeChild( aux.firstChild );
+  while (aux.firstChild) {
+    aux.removeChild(aux.firstChild);
   }
   for (let i = 0; i < mercadoPago.operaciones.length; i++) {
     // Cargo lista MercadoPago
@@ -85,11 +87,8 @@ function htmlOperaciones() {
 
 // -- handlers de eventos --
 
-// Botón Reset
-//let reset = document.getElementById("reset");
-
-$("#reset").click( () => {
-
+// Botón "Reset"
+$("#reset").click(() => {
   efectivo = new Medio(
     parseInt(prompt("Ingrese la cantidad de dinero en efectivo disponible"), 10)
   );
@@ -107,121 +106,121 @@ $("#reset").click( () => {
 
   htmlDisponible();
   htmlOperaciones();
-  
+
   localStorage.setItem("efectivo", JSON.stringify(efectivo));
   localStorage.setItem("banco", JSON.stringify(banco));
   localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));
 });
 
-// Submit de operación en efectivo
+// Botón "Submit" de operación en efectivo
 let efectivoSubmit = document.getElementById("efectivo-submit");
 efectivoSubmit.onclick = () => {
-
-  let operacion = document.querySelector('input[name="efectivo"]:checked').value;
-  let monto = parseInt(document.getElementById("efectivo-monto").value,10);
+  let operacion = document.querySelector(
+    'input[name="efectivo"]:checked'
+  ).value;
+  let monto = parseInt(document.getElementById("efectivo-monto").value, 10);
   let descripcion = document.getElementById("efectivo-desc").value;
   let descripcionExt;
 
-  if(operacion == "Ganancia"){
+  if (operacion == "Ganancia") {
     descripcionExt = "G | " + descripcion + " | Monto: " + monto;
-    efectivo.suma(monto, descripcionExt)
-  }else{
+    efectivo.suma(monto, descripcionExt);
+  } else {
     descripcionExt = "P | " + descripcion + " | Monto: " + monto;
-    efectivo.resta(monto, descripcionExt)
+    efectivo.resta(monto, descripcionExt);
   }
 
   htmlDisponible();
   htmlOperaciones();
-  
+
   localStorage.setItem("efectivo", JSON.stringify(efectivo));
 
   $("#efectivo-form").trigger("reset");
-}
+};
 
-// Submit de operación en banco
+// Botón "Submit" de operación en banco
 let bancoSubmit = document.getElementById("banco-submit");
 bancoSubmit.onclick = () => {
   let operacion = document.querySelector('input[name="banco"]:checked').value;
-  let monto = parseInt(document.getElementById("banco-monto").value,10);
+  let monto = parseInt(document.getElementById("banco-monto").value, 10);
   let descripcion = document.getElementById("banco-desc").value;
   let descripcionExt;
 
-  if(operacion == "Ganancia"){
+  if (operacion == "Ganancia") {
     descripcionExt = "G | " + descripcion + " | Monto: " + monto;
-    banco.suma(monto, descripcionExt)
-  }else{
+    banco.suma(monto, descripcionExt);
+  } else {
     descripcionExt = "P | " + descripcion + " | Monto: " + monto;
-    banco.resta(monto, descripcionExt)
+    banco.resta(monto, descripcionExt);
   }
 
   htmlDisponible();
   htmlOperaciones();
-  
+
   localStorage.setItem("banco", JSON.stringify(banco));
 
   $("#banco-form").trigger("reset");
-}
+};
 
-// Submit de operación en Mercado Pago
+// Botón "Submit" de operación en Mercado Pago
 let mercadoPagoSubmit = document.getElementById("mercadoPago-submit");
 mercadoPagoSubmit.onclick = () => {
-  let operacion = document.querySelector('input[name="mercadoPago"]:checked').value;
-  let monto = parseInt(document.getElementById("mercadoPago-monto").value,10);
+  let operacion = document.querySelector(
+    'input[name="mercadoPago"]:checked'
+  ).value;
+  let monto = parseInt(document.getElementById("mercadoPago-monto").value, 10);
   let descripcion = document.getElementById("mercadoPago-desc").value;
   let descripcionExt;
 
-  if(operacion == "Ganancia"){
+  if (operacion == "Ganancia") {
     descripcionExt = "G | " + descripcion + " | Monto: " + monto;
-    mercadoPago.suma(monto, descripcionExt)
-  }else{
+    mercadoPago.suma(monto, descripcionExt);
+  } else {
     descripcionExt = "P | " + descripcion + " | Monto: " + monto;
-    mercadoPago.resta(monto, descripcionExt)
+    mercadoPago.resta(monto, descripcionExt);
   }
 
   htmlDisponible();
   htmlOperaciones();
-  
+
   localStorage.setItem("mercadoPago", JSON.stringify(mercadoPago));
 
   $("#mercadoPago-form").trigger("reset");
-}
+};
 
 //Botones "Registrar operacion"
 
-$("#efectivo-registrar").click(() => { 
+$("#efectivo-registrar").click(() => {
   $("#efectivo-form").toggle("fast");
 });
 
-$("#banco-registrar").click(() => { 
+$("#banco-registrar").click(() => {
   $("#banco-form").toggle("fast");
 });
 
-$("#mercadoPago-registrar").click(() => { 
+$("#mercadoPago-registrar").click(() => {
   $("#mercadoPago-form").toggle("fast");
 });
 
 // AJAX
 
 //Declaramos la url que vamos a usar para el GET
-const URLGET = "http://hp-api.herokuapp.com/api/characters"
+const URLGET = "http://hp-api.herokuapp.com/api/characters";
 
 //Agregamos un botón con jQuery
 $("body").prepend('<button id="btn1">GET</button>');
 
 //Escuchamos el evento click del botón agregado
-$("#btn1").click(() => { 
-    $.get(URLGET, function (respuesta, estado) {
-          if(estado === "success"){
-            let misDatos = respuesta;
-            for (const dato of misDatos) {
-              console.log(dato.name);
-            }  
-          }
-    });
+$("#btn1").click(() => {
+  $.get(URLGET, function (respuesta, estado) {
+    if (estado === "success") {
+      let misDatos = respuesta;
+      for (const dato of misDatos) {
+        console.log(dato.name);
+      }
+    }
+  });
 });
-
-
-
 
 //main()
 
